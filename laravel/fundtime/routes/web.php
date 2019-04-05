@@ -12,5 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('emails/mail');
+});
+
+Route::name('mails.')->group(/*['middleware' => ['auth']], */function () {
+    Route::post('/mail', 'MailsController@getIndex')->name('index');
+    Route::post('/emails/mail_confirmed', 'MailsController@sendMail')->name('send');
 });
