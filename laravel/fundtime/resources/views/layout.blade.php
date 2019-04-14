@@ -4,39 +4,28 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Fund Time')</title>
     <link rel="stylesheet" href="../css/app.css">
-    <!-- <script src="js/app.js"></script> -->
+    <link rel="stylesheet" href="../css/fundtime.css">
 </head>
 
 <body>
 
-    <!-- Start Top Bar -->
-    <div class="top-bar">
-        <div class="row">
-            <div class="top-bar-left">
-                <ul class="dropdown menu" data-dropdown-menu="tckp8q-dropdown-menu" role="menubar">
-                    <li role="menuitem"><a href="/">Home</a></li>
-                    <li role="menuitem"><a href="/clients">Projects</a></li>
-                    <li role="menuitem"><a href="/reservations">Profile</a></li>
-                </ul>
-            </div>
+    @include('partials/header')
+
+    <div id="app" class="container body__content">
+        <div style="width:100%;">
+            @yield('content')
         </div>
+
     </div>
-    <!-- End Top Bar -->
-
-    <br>
+    @include('partials/footer')
 
 
-    @yield('content')
-
-    <div class="row column">
-        <hr>
-        <ul class="menu">
-            <li class="float-right">Copyright 2019</li>
-        </ul>
-    </div>
-
+    
+    @include('partials/scripts')
 </body>
+
 
 </html>

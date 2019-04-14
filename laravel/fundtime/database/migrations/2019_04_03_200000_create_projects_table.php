@@ -14,13 +14,13 @@ class CreateProjectsTable extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('title', 200);
             $table->string('description');
             $table->integer('target_amount')->unsigned();
-            $table->date('start_date');
+            $table->date('start_date')->nullable();
             $table->date('deadline_date');
             
             $table->timestamps();

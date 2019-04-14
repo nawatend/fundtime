@@ -21,8 +21,8 @@ class MailsController extends Controller
         Mail::send('emails.mail_template', $data, function ($message) {
             $message->to('frederick.roegiers@arteveldehs.be', 'Frederick Roegiers')->subject('Mailgun is successfully implemented');
         });
-
         //Mail::to('n.tendar@gmail.com')->send(new SendMail);
         return view("emails.mail_confirmed");
     }
 }
+//frederick.roegiers@arteveldehs.be

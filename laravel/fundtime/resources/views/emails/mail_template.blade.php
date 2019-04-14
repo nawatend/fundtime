@@ -11,12 +11,13 @@
 
             <center>
                 <menu class="text-center" style="">
-                    <item href="#"
-                        style="color: white;font-size: 16px; padding:10px; background-color:red; font-weight: bold; ">Be
-                        the
-                        first backer</item>
+                    <a href="https://github.com/nawatend/fundtime"
+                        style="color: white;font-size: 16px; padding:10px; background-color:#F06060; font-weight: bold; ">Go
+                        To Repo</a>
 
                 </menu>
+                <h4 style="font-size: 18px; color: '#3490dc';">An exciting future of terrorizing sailors awaits you at
+                    FundTime.</h4>
             </center>
 
         </columns>
@@ -36,7 +37,7 @@
 
             <spacer size="16"></spacer>
 
-            <h4>An exciting future of terrorizing sailors awaits you at FundTime.</h4>
+
             <p>{!!$body!!}</p>
 
             <center>

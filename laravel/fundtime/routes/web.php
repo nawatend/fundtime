@@ -16,6 +16,38 @@ Route::get('/', function () {
 });
 
 Route::name('mails.')->group(/*['middleware' => ['auth']], */function () {
-    Route::post('/mail', 'MailsController@getIndex')->name('index');
+    Route::get('/mail', 'MailsController@getIndex')->name('index');
     Route::post('/emails/mail_confirmed', 'MailsController@sendMail')->name('send');
 });
+
+
+Route::name('news.')->group(/*['middleware' => ['auth']], */function () {
+    Route::get('/news', 'NewsController@getIndex')->name('index');
+});
+
+Route::name('profile.')->group(/*['middleware' => ['auth']], */function () {
+    Route::get('/profile', 'ProfileController@getIndex')->name('index');
+    Route::get('/profile/edit', 'ProfileController@getEdit')->name('edit');
+});
+
+Route::name('projects.')->group(/*['middleware' => ['auth']], */function () {
+    Route::get('/projects', 'ProjectsController@getIndex')->name('index');
+    Route::get('/projects/new', 'ProjectsController@getCreate')->name('edit');
+});
+
+
+// dynamic routes
+Route::name('pages.')->group(function () {
+    Route::get('/', 'PagesController@getIndex')->name('home');
+    Route::get('/about', 'PagesController@getAbout')->name('about');
+    Route::get('/contacts', 'PagesController@getContacts')->name('contacts');
+    Route::get('/privacy', 'PagesController@getPrivacy')->name('privacy');
+});
+
+
+
+
+
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');

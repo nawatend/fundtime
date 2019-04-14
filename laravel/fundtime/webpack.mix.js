@@ -12,4 +12,16 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css');
+
+mix.combine([
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/foundation-sites/dist/js/foundation.js',
+    'node_modules/what-input/dist/what-input.js',
+    'node_modules/pickadate/lib/picker.js',
+    'node_modules/pickadate/lib/picker.date.js',
+    'resources/js/fundtime.js'
+], 'public/js/fundtime.js');
+
+
+mix.sass('resources/sass/fundtime.scss', 'public/css');
