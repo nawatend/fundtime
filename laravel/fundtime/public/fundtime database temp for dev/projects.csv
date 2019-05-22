@@ -1,0 +1,7 @@
+id,user_id,category_id,title,description,target_amount,start_date,end_date,cover_image_path,created_at,updated_at
+1,1,2,Mark 45,Test Descrip,85556,"2019-04-18,2019-04-30","2019-06-18,2019-04-30",../images/about_community.jpg,"2019-06-18,2019-04-30","2019-06-18,2019-04-30"
+2,1,3,Mark 45,Test Descrip,561651,"2019-04-18,2019-04-30","2019-06-18,2019-04-30",../images/about_community.jpg,"2019-06-18,2019-04-30","2019-06-18,2019-04-30"
+3,2,1,Mark 45,Test Descrip,45456,"2019-04-18,2019-04-30","2019-06-18,2019-04-30",../images/about_community.jpg,"2019-06-18,2019-04-30","2019-06-18,2019-04-30"
+4,1,4,Mark 85,Test Descrip,5612,"2019-04-18,2019-04-30","2019-06-18,2019-04-30",../images/about_community.jpg,"2019-06-18,2019-04-30","2019-06-18,2019-04-30"
+5,2,5,Mark 45,Test Descrip,2313,"2019-04-18,2019-04-30","2019-06-18,2019-04-30",../images/about_community.jpg,"2019-06-18,2019-04-30","2019-06-18,2019-04-30"
+6,1,2,Mark 45,Test Descrip,651561,"2019-04-18,2019-04-30","2019-06-18,2019-04-30",../images/about_community.jpg,"2019-06-18,2019-04-30","2019-06-18,2019-04-30"

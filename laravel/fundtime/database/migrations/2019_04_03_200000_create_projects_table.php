@@ -17,12 +17,15 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('title', 200);
             $table->string('description');
             $table->integer('target_amount')->unsigned();
-            $table->date('start_date')->nullable();
-            $table->date('deadline_date');
-            
+            $table->integer('funded_amount')->unsigned();
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('cover_image_path');
             $table->timestamps();
         });
     }

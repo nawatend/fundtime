@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" style="margin-top: 50px !important;">
         <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-teal">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">

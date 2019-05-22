@@ -15,6 +15,11 @@ class CreateCategoryProjectTable extends Migration
     {
         Schema::create('category_project', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->integer('project_id')->unsigned();
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

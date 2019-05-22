@@ -2595,4 +2595,4 @@ Picker.extend( 'pickadate', DatePicker )
 
 
 
-$(document).foundation()
+$(document).foundation();

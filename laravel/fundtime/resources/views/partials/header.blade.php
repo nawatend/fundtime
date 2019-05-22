@@ -12,13 +12,22 @@
         <a class="nav-item nav-link" href="{{ route('news.index') }}">News</a>
         <a class="nav-item nav-link" href="{{ route('projects.index') }}">Projects</a>
         <a class="nav-item nav-link" href="{{ route('pages.about') }}">About</a>
-
+        <a class="nav-item nav-link" href="{{ route('shop.index') }}">Buy F's</a>
       </div>
       <div class="navbar-nav">
 
+        @if(Auth::check())
+        <a class="nav-item nav-link" href="{{route('projects.myprojects')}}">My Projects</a>
+        <a href="{{ route('shop.index') }}" class="badge badge-light">
+          <button type="button" class="btn btn-light">
+            <span class="badge">You have {{Auth::user()->credits}} F's</span>
+          </button>
+        </a>
+        <a class="nav-item nav-link" href="{{route('home')}}">Logout</a>
+        @else
         <a class="nav-item nav-link" href="{{route('home')}}">Login</a>
-        <a class="nav-item nav-link" href="#">Register</a>
-
+        <a class="nav-item nav-link" href="{{route('register')}}">Register</a>
+        @endif
       </div>
 
     </div>

@@ -466,6 +466,13 @@
 /* ==========================================================================
    $DEFAULT-DATE-PICKER
    ========================================================================== */
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 20px !important;
+}
+
 .white-text {
   color: white !important;
 }
@@ -482,6 +489,77 @@
   background-color: #2BBBAD !important;
 }
 
+.bg-legendary {
+  background-color: #ffc15e !important;
+  color: white;
+}
+
+.bg-epic {
+  background-color: #8158fc !important;
+  color: white;
+}
+
+.bg-rare {
+  background-color: #207dff !important;
+  color: white;
+}
+
+.myCard {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 3px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.slide-image {
+  -o-object-fit: cover !important;
+     object-fit: cover !important;
+  width: 100%;
+  height: 550px;
+}
+
+.project_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pledges-container {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.card-deck .card {
+  min-width: 220px;
+}
+
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.card-horizontal img {
+  height: 180px;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+h3 {
+  text-transform: capitalize;
+}
+
+@media (max-width: 576px) {
+  .slide-image {
+    -o-object-fit: cover !important;
+       object-fit: cover !important;
+    width: 100%;
+    height: 200px;
+  }
+}
+
 @media (min-width: 576px) {
   .card-columns {
     -webkit-column-count: 2;
@@ -490,6 +568,13 @@
     column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
+  }
+
+  .slide-image {
+    -o-object-fit: cover !important;
+       object-fit: cover !important;
+    width: 100%;
+    height: 350px;
   }
 }
 
@@ -502,6 +587,13 @@
     orphans: 1;
     widows: 1;
   }
+
+  .slide-image {
+    -o-object-fit: cover !important;
+       object-fit: cover !important;
+    width: 100%;
+    height: 400px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -512,6 +604,19 @@
     column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
+  }
+
+  .slide-image {
+    -o-object-fit: cover !important;
+       object-fit: cover !important;
+    width: 100%;
+    height: 550px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1260px !important;
   }
 }
 

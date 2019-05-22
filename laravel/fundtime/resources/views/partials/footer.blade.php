@@ -74,12 +74,8 @@
                 <!-- Links -->
                 <h6 class="text-uppercase font-weight-bold">Useful links</h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a class="dark-grey-text white-text" href="#!">Your Account</a>
-                </p>
-                <p>
-                    <a class="dark-grey-text white-text" href="#!">Become an Affiliate</a>
-                </p>
+
+
                 <p>
                     <a class="dark-grey-text white-text" href="{{route('pages.privacy')}}">Privacy</a>
                 </p>

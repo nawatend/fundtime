@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('emails/mail');
-});
+// Route::get('/', function () {
+//     return view('emails/mail');
+// });
 
 Route::name('mails.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/mail', 'MailsController@getIndex')->name('index');
@@ -23,6 +23,8 @@ Route::name('mails.')->group(/*['middleware' => ['auth']], */function () {
 
 Route::name('news.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/news', 'NewsController@getIndex')->name('index');
+    Route::get('/news/new', 'NewsController@getCreate')->name('create');
+    Route::post('/news/save', 'NewsController@postSave')->name('save');
 });
 
 Route::name('profile.')->group(/*['middleware' => ['auth']], */function () {
@@ -32,7 +34,12 @@ Route::name('profile.')->group(/*['middleware' => ['auth']], */function () {
 
 Route::name('projects.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/projects', 'ProjectsController@getIndex')->name('index');
-    Route::get('/projects/new', 'ProjectsController@getCreate')->name('edit');
+    Route::get('/myprojects', 'ProjectsController@getMyProjects')->name('myprojects');
+    Route::get('/projects/new', 'ProjectsController@getCreate')->name('create');
+    Route::get('/projects/edit/{projectId}', 'ProjectsController@getEdit')->name('edit');
+    Route::get('/projects/detail/{projectId}', 'ProjectsController@getDetail')->name('detail');
+    Route::post('/projects/save', 'ProjectsController@postSave')->name('save');
+    Route::post('/projects/savefund', 'ProjectsController@postFund')->name('savefund');
 });
 
 
@@ -45,8 +52,16 @@ Route::name('pages.')->group(function () {
 });
 
 
+Route::name('shop.')->group(function () {
+    Route::get('/shop', 'ShopItemsController@getIndex')->name('index');
+    Route::post('/shop/confirmed', 'ShopItemsController@postConfirmed')->name('confirmed');
+});
 
 
+Route::name('stripe.')->group(function () {
+    Route::get('/payment', 'PaymentController@getStripeForm')->name('index');
+    Route::post('/confirm', 'PaymentController@postStripePayment')->name('confirm');
+});
 
 
 Auth::routes();
