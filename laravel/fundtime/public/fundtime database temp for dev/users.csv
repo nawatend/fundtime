@@ -1,3 +1,3 @@
 id,name,email,email_verified_at,password,role,credits,remember_token,created_at,updated_at
-1,Nawang Tendar,n@gmail.com,2019-04-18 17:41:32,$2y$10$0fG7cemQUXDoQL7WE/MA9uO1C/Y..LahNAyhpHcGzCps11dR1Gpxe,user,9000,NULL,2019-04-18 17:41:32,2019-04-19 15:45:51
-2,Jean Claud,j@gmail.com,2019-04-18 17:41:32,$2y$10$DHry5iaId/twmKW1XbXRduXOhofH66htBwd1oCtSRsCCEcaCN/xMK,user,22400,NULL,2019-04-19 18:08:56,2019-04-26 14:55:08
+3,"Nawang Tendar",n@gmail.com,NULL,$2y$10$cMmXp1oJW4IqfNAhslyquOGpzdZ.H6XNjBPMPgrG8nIYjsFx/88/K,admin,44000,NULL,"2019-05-08 13:11:51","2019-05-25 12:23:07"
+4,"Jean Claud",j@gmail.com,NULL,$2y$10$/TEfTGCk.gB.q982iYQCPuyEP3/CQ60NnC/93tR7i6JE8n6pAyY1e,user,44667,NULL,"2019-05-11 18:10:27","2019-05-25 13:03:15"

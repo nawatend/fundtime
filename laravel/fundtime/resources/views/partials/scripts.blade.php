@@ -4,11 +4,15 @@
 <script>
     feather.replace()
 </script>
-
+<script src="{{asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+<script>
+    CKEDITOR.replace('textarea_description');
+</script>
 <script src="{{ asset('js/fundtime.js') }}"></script>
 <script>
     $(document).foundation();
 </script>
+
 <script>
     $('.datepicker').pickadate({
         format: 'dd-mm-yyyy',

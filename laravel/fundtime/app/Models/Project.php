@@ -10,8 +10,9 @@ class Project extends Model
 
     protected $fillable = [
         'user_id',
-        'title',
         'category_id',
+        'title',
+        'intro',
         'description',
         'target_amount',
         'funded_amount',
@@ -19,4 +20,16 @@ class Project extends Model
         'end_date',
         'cover_image_path',
     ];
+
+    public function getEndDateByFormat($format)
+    {
+        return \DateTime::createFromFormat($format, $this->end_date);
+    }
+
+    public function getStartDateByFormat($format)
+    {
+        $start_date = \DateTime::createFromFormat($format, $this->start_date);
+        
+        return  $start_date;
+    }
 }

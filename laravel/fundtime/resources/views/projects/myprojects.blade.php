@@ -25,7 +25,7 @@
             <img src="{{$project->cover_image_path}}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{$project->title}}</h5>
-                <p class="card-text">{{$project->description}}</p>
+                <p class="card-text">{{$project->intro}}</p>
                 <a href="{{route('projects.detail', $project->id)}}" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>

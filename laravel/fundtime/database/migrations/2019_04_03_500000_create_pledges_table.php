@@ -16,7 +16,7 @@ class CreatePledgesTable extends Migration
         Schema::create('pledges', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('project_id')->unsigned();
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
 
             $table->string('title', 200);
             $table->string('description');

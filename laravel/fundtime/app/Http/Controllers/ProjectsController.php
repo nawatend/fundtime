@@ -8,20 +8,23 @@ use App\Models\User;
 use App\Models\Pledge;
 use App\Models\ProjectImage;
 use App\Models\Category;
+use App\Models\CategoryProject;
 use App\Models\Backer;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectsController extends Controller
 {
-    public function getIndex()
+    public function getIndex(Category $category = null)
     {
         //sortByDesc Z -> A
         //sortBy
         $categories = Category::all()->sortBy("category_name");
         $projects = Project::all();
+        
         return view('projects.index', compact('projects', 'categories'));
     }
     public function getMyProjects()
@@ -34,16 +37,25 @@ class ProjectsController extends Controller
         return view('projects.myprojects', compact('projects', 'categories', 'user'));
     }
     
-    public function getCreate(Project $project)
+    public function getCreate(Project $project, Pledge $pledge)
     {
-        return view('projects.edit', compact('project'));
+        $categories = Category::all();
+        $pledges = [$pledge,$pledge,$pledge];
+        return view('projects.edit', compact('project', 'pledges', 'categories'));
     }
 
 
     public function getEdit($project_id)
     {
+        $categories = Category::all();
         $project = Project::find($project_id);
-        return view('projects.edit', compact('project'));
+        $pledges = Pledge::where('project_id', $project_id)->get();
+      
+
+        $start_date = $project->getStartDateByFormat('Y-m-d');
+        $end_date = $project->getEndDateByFormat('Y-m-d');
+
+        return view('projects.edit', compact('project', 'pledges', 'categories'));
     }
     public function getDetail($project_id)
     {
@@ -55,11 +67,16 @@ class ProjectsController extends Controller
         $pledges = Pledge::where('project_id', $project_id)->get();
         $user = Auth::user();
 
-
+        $backers = DB::table('backers')
+        ->join('users', 'backers.user_id', '=', 'users.id')
+        ->join('pledges', 'backers.pledge_id', '=', 'pledges.id')
+        ->get();
         //dd($images);
         // check if project exists
         // if(!$project->id) abort('404');
-        return view('projects.detail', compact('user', 'project', 'images', 'pledges', 'pledgeLegendary', 'pledgeEpic', 'pledgeRare'));
+    
+        
+        return view('projects.detail', compact('backers', 'user', 'project', 'images', 'pledges', 'pledgeLegendary', 'pledgeEpic', 'pledgeRare'));
     }
 
     public function postSave()
@@ -67,11 +84,12 @@ class ProjectsController extends Controller
         
         //cleint id update
         $user = Auth::user();
-        $project_id = (request("projectId")) ? request('projectId') : null;
+        $project_id = (request("project_id")) ? request('project_id') : null;
         $request = request();
 
         $rules = [
-            'project_title'         => 'required|max:255' ,
+            'project_title'         => 'required|max:200' ,
+            'project_intro' => 'required|max:400',
             'project_description'   => 'required' ,
             'project_target_amount' => 'required|integer',
             'project_category'      => 'required',
@@ -85,7 +103,6 @@ class ProjectsController extends Controller
             'legendary_info'        => 'required' ,
             'epic_info'             => 'required' ,
             'rare_info'             => 'required' ,
-
         ];
 
         //$validator = Validator::make($request->all(), $rules);
@@ -104,6 +121,7 @@ class ProjectsController extends Controller
             'user_id'       => $user->id,
             'category_id'   => request('project_category') ,
             'title'         => request('project_title') ,
+            'intro' => request('project_intro'),
             'description'   => request('project_description') ,
             'target_amount' => request('project_target_amount'),
             'funded_amount' => 0,
@@ -115,7 +133,8 @@ class ProjectsController extends Controller
         $dataProject['start_date'] = \DateTime::createFromFormat('d-m-Y', $dataProject['start_date']);
         $dataProject['end_date'] = \DateTime::createFromFormat('d-m-Y', $dataProject['end_date']);
 
- 
+        
+        //last added project id
         $lastEditProject = Project::UpdateOrCreate(['id' => $project_id], $dataProject);
         $currentProjectId = $lastEditProject->id;
 
@@ -141,15 +160,16 @@ class ProjectsController extends Controller
             }
         }
 
-        // dd(json_encode($data));
+        // projects and categories relations
+        $categoryProject = [
+            'project_id'   => $currentProjectId ,
+            'category_id'   => request('project_category'),
+        ];
+        CategoryProject::UpdateOrCreate(['project_id' => $currentProjectId], $categoryProject);
+
 
 
         //insert pledges for current project
-        /**
-         * l = legendary
-         * e = epic
-         * r = rare
-         */
         $l_pledge = [
             'project_id' => $currentProjectId,
             'title' => "Legendary Pledge",
@@ -182,31 +202,12 @@ class ProjectsController extends Controller
     }
 
 
-    public function postFund()
+    public function destroy($project_id)
     {
-        $project_id = (request("project_id")) ? request('project_id') : null;
-        $pledge_id = (request("pledge_id")) ? request('pledge_id') : null;
-        $user = Auth::user();
-        
         $project = Project::find($project_id);
-        $pledge = Pledge::find($pledge_id);
-
-        //cleint id update
-       
-        $total_user_f = $user->credits - $pledge->price;
-
-        $user->credits = $total_user_f;
-        $user->save();
-
-        //create a baker
-        $newBaker = [
-            'project_id' => $project_id,
-            'user_id' => $user->id,
-            'pledge_id' => $pledge_id,
-        ];
-        Backer::UpdateOrCreate($newBaker);
-
-        //add fund to project funded f's
-        return view('projects.pledge_confirm', compact('project', 'pledge', 'user'));
+        
+        $project->delete();
+        
+        return redirect()->route('projects.index');
     }
 }

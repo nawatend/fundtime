@@ -25,6 +25,8 @@ Route::name('news.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/news', 'NewsController@getIndex')->name('index');
     Route::get('/news/new', 'NewsController@getCreate')->name('create');
     Route::post('/news/save', 'NewsController@postSave')->name('save');
+    Route::get('/news/edit/{news_id}', 'NewsController@getEdit')->name('edit');
+    Route::get('/news/detail/{news_id}', 'NewsController@getDetail')->name('detail');
 });
 
 Route::name('profile.')->group(/*['middleware' => ['auth']], */function () {
@@ -39,9 +41,15 @@ Route::name('projects.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/projects/edit/{projectId}', 'ProjectsController@getEdit')->name('edit');
     Route::get('/projects/detail/{projectId}', 'ProjectsController@getDetail')->name('detail');
     Route::post('/projects/save', 'ProjectsController@postSave')->name('save');
-    Route::post('/projects/savefund', 'ProjectsController@postFund')->name('savefund');
+    Route::get('/projects/delete/{projectId}', 'ProjectsController@destroy')->name('delete');
+});
+Route::name('categories.')->group(/*['middleware' => ['auth']], */function () {
+    Route::get('/projects/categories/{category}', 'CategoryController@getIndex')->name('index');
 });
 
+Route::name('backers.')->group(/*['middleware' => ['auth']], */function () {
+    Route::post('/projects/savefund', 'BackersController@postBacker')->name('save');
+});
 
 // dynamic routes
 Route::name('pages.')->group(function () {

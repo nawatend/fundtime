@@ -10,7 +10,7 @@
     <div class="col-sm-6 col-md-4 py-2">
         <form action="{{route('stripe.index')}}" method="get">
             @csrf
-            <div class="card h-100 bg-{{$shop_item->type}}" style="width: 100%;">
+            <div class="card h-100 bg-g-{{$shop_item->type}} " style="width: 100%;">
                 <div class="card-body">
                     <input type="hidden" name="total_f" value="{{ $shop_item->total_f }}" />
                     <h5 class="card-title">{{$shop_item->total_f}} F's</h5>

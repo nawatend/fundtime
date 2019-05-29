@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-teal">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-g-teal ">
   <div class="container">
     <a class="navbar-brand" href="{{ route('pages.home') }}">Fund Time</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -7,17 +7,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="{{ route('pages.home') }}">Home <span
-            class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="{{ route('news.index') }}">News</a>
-        <a class="nav-item nav-link" href="{{ route('projects.index') }}">Projects</a>
-        <a class="nav-item nav-link" href="{{ route('pages.about') }}">About</a>
-        <a class="nav-item nav-link" href="{{ route('shop.index') }}">Buy F's</a>
+        <a class="nav-item nav-link @if(Route::is('pages.home')) active @endif" href="{{ route('pages.home') }}">Home
+          <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link @if(Route::is('news.index')) active @endif"
+          href="{{ route('news.index') }}">News</a>
+        <a class="nav-item nav-link @if(Route::is('projects.index')) active @endif"
+          href="{{ route('projects.index') }}">Projects</a>
+        <a class="nav-item nav-link @if(Route::is('pages.about')) active @endif"
+          href="{{ route('pages.about') }}">About</a>
+        <a class="nav-item nav-link @if(Route::is('shop.index')) active @endif" href="{{ route('shop.index') }}">Buy
+          F's</a>
       </div>
       <div class="navbar-nav">
 
         @if(Auth::check())
-        <a class="nav-item nav-link" href="{{route('projects.myprojects')}}">My Projects</a>
+        <a class="nav-item nav-link @if(Route::is('projects.myprojects')) active @endif"
+          href="{{route('projects.myprojects')}}">My Projects</a>
         <a href="{{ route('shop.index') }}" class="badge badge-light">
           <button type="button" class="btn btn-light">
             <span class="badge">You have {{Auth::user()->credits}} F's</span>

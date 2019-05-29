@@ -485,8 +485,50 @@ h4 {
   padding: 30px !important;
 }
 
+.progress {
+  margin-top: 20px;
+  height: 35px;
+}
+
+.table {
+  margin-left: 20px !important;
+}
+
+p {
+  word-break: break-all !important;
+  white-space: normal !important;
+}
+
+.bg-success {
+  background-color: #2BBBAD !important;
+}
+
+.bg-error {
+  background-color: #ff5959 !important;
+}
+
 .bg-teal {
   background-color: #2BBBAD !important;
+}
+
+.bg-g-teal {
+  background-image: linear-gradient(to bottom right, #2BBBAD, #108178) !important;
+  color: white;
+}
+
+.bg-g-legendary {
+  background-image: linear-gradient(to right, #FFB75E, #ffc15e) !important;
+  color: white;
+}
+
+.bg-g-epic {
+  background-image: linear-gradient(to right, #8158fc, #926ffa) !important;
+  color: white;
+}
+
+.bg-g-rare {
+  background-image: linear-gradient(to right, #207dff, #2948ff) !important;
+  color: white;
 }
 
 .bg-legendary {
@@ -502,6 +544,12 @@ h4 {
 .bg-rare {
   background-color: #207dff !important;
   color: white;
+}
+
+.card-img-top {
+  max-height: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .myCard {

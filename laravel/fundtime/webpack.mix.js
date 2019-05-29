@@ -20,7 +20,7 @@ mix.combine([
     'node_modules/what-input/dist/what-input.js',
     'node_modules/pickadate/lib/picker.js',
     'node_modules/pickadate/lib/picker.date.js',
-    'resources/js/fundtime.js'
+    'resources/js/fundtime.js',
 ], 'public/js/fundtime.js');
 
 

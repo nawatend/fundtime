@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Project;
 
 class Category extends Model
 {
@@ -12,4 +13,14 @@ class Category extends Model
         'category_name',
         
     ];
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'category_name';
+    }
 }

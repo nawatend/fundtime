@@ -1,17 +1,27 @@
 @extends('layout')
 
 
-@section("title",'Projects')
+@section("title",'Project')
 
 @section('content')
 <div class="project_title">
     <div style="width: 80%;">
         <h1>{{$project->title}}</h1>
     </div>
+
+    @if(Auth::check() && $project->user_id == $user->id)
+
     <a href="{{route('projects.edit', $project->id)}}"><button class="btn btn-primary" type="submit">Edit
             Project</button></a>
-</div>
 
+    <a href="{{route('projects.delete', $project->id)}}"><button class="btn btn-danger" type="submit">Delete
+        </button></a>
+
+    @endif
+</div>
+@if (Session::has('message'))
+<div class="alert alert-danger">{{ Session::get('message') }}</div>
+@endif
 <!-- images slider -->
 <div id="carouselExampleIndicators" class="carousel slide" style="width: 100%;" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -44,16 +54,27 @@
 </div>
 <!-- images slider end-->
 
+<!-- Progress Bar start -->
+<div class="progress">
 
+    <div class="progress-bar bg-success" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0"
+        aria-valuemax="100">70%</div>
+    <div class="progress-bar bg-error" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0"
+        aria-valuemax="100">30%</div>
+</div>
+<!-- Progress Bar End -->
 
 <!-- Pledges card info -->
 <div class="pledges-container">
+
+    @if (Session::has('message'))
+    <div class="alert alert-danger">{{ Session::get('message') }}</div>
+    @endif
     <div class="card-deck mb-3 text-center">
 
         @foreach($pledges as $pledge)
-
         <div class="card mb-4 box-shadow">
-            <form action="{{route('projects.savefund')}}" method="post">
+            <form action="{{route('backers.save')}}" method="post">
                 @csrf
 
                 <input type="hidden" name="pledge_id" value="{{ $pledge->id }}" />
@@ -99,9 +120,61 @@
 <!-- Pledges card info END-->
 
 <!-- Project Information -->
+<div class="container">
+    <!-- intro -->
+    <h2>Intro</h2>
+    <hr class="featurette-divider">
+    <div class="row featurette">
 
+        <div class="col-md-7">
+            <p> {{$project->intro}}</p>
+        </div>
+    </div>
 
+    <h2>Description</h2>
+    <hr class="featurette-divider">
+    <div class="row featurette">
+
+        <div class="col-md-12">
+            <p> {!!$project->description!!}</p>
+        </div>
+
+    </div>
+</div>
 
 <!-- Project Information End -->
 
+<!-- Project Heros list -->
+
+<div class="container">
+    <h2>Our Backers</h2>
+    <div class="row featurette">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Amount Of F's </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @php ($i = 1)
+                @foreach($backers as $backer)
+                @if($backer->project_id == $project->id)
+                <tr>
+                    <th scope="row">{{$i}}</th>
+                    <td>{{$backer->name}}</td>
+                    <td>{{$backer->price}}</td>
+                </tr>
+                @php ($i += 1)
+                @endif
+                @endforeach
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<!-- Project Heros list end -->
 @endsection

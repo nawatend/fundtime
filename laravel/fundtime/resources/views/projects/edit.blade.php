@@ -8,7 +8,7 @@
 <h1>Create New Project</h1>
 <form action="{{ route('projects.save') }}" method="post" style="width:100%;" enctype="multipart/form-data">
     @csrf
-
+    <input type="hidden" name='project_id' value="{{$project->id}}">
     @if($errors->any())
     <div class="alert alert-danger">
         <strong>Son</strong>, Something went wrong.
@@ -44,7 +44,7 @@
             <input type="number"
                 class="form-control {{$errors->any() ? $errors->has('project_target_amount') ? 'is-invalid': 'is-valid' : ''}}"
                 min="0" id="validationServer02" placeholder="Target amount of money" name="project_target_amount"
-                value="{{old('project_target_amount')}}">
+                value="{{old('project_target_amount',$project->target_amount)}}">
 
             @if ($errors->has('project_target_amount'))
             <div class="invalid-feedback">
@@ -60,13 +60,11 @@
         <div class="form-group col-md-4">
             <label for="inputState">Category</label>
             <select id="inputState" class="form-control" name='project_category'>
-                <option value='1'>Sport</option>
-                <option value='2'>Technology</option>
-                <option value='3'>Non-profit</option>
-                <option value='4'>Games</option>
-                <option value='5'>Medical</option>
-                <option value='6'>Environmental</option>
-                <option value='7' selected>others</option>
+                @foreach($categories as $category):
+                <option value="{{$category->id}}" @if($project->category_id == $category->id) selected @endif>
+                    {{ucfirst($category->category_name)}}
+                </option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -75,7 +73,8 @@
             <label for="validationServer03">Start Date</label>
             <input type="text"
                 class="form-control datepicker {{$errors->any() ? $errors->has('start_date') ? 'is-invalid': 'is-valid' : ''}}"
-                id="validationServer03" name="start_date" placeholder="Start Date" value="{{old('start_date')}}">
+                id="validationServer03" name="start_date" placeholder="Start Date"
+                value="{{old('start_date',($project->getStartDateByFormat('Y-m-d')) ? $project->getStartDateByFormat('Y-m-d')->format('d-m-Y') : '')}}">
 
             @if ($errors->has('start_date'))
             <div class="invalid-feedback">
@@ -91,7 +90,8 @@
             <label for="validationServer04">End Date</label>
             <input type="text"
                 class="form-control datepicker {{$errors->any() ? $errors->has('end_date') ? 'is-invalid': 'is-valid' : ''}}"
-                id="validationServer04" placeholder="End Date" name="end_date" value="{{old('end_date')}}">
+                id="validationServer04" placeholder="End Date" name="end_date"
+                value="{{old('end_date',($project->getEndDateByFormat('Y-m-d')) ? $project->getEndDateByFormat('Y-m-d')->format('d-m-Y') : '')}}">
 
             @if ($errors->has('end_date'))
             <div class="invalid-feedback">
@@ -105,12 +105,31 @@
         </div>
     </div>
 
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea12">Project Intro</label>
+        <textarea
+            class="form-control {{$errors->any() ? $errors->has('project_intro') ? 'is-invalid': 'is-valid' : ''}}"
+            rows="4" name="project_intro" maxlength="400"
+            value="{{old('project_intro',$project->intro)}}">{{old('project_intro',$project->intro)}}</textarea>
+        @if ($errors->has('project_intro'))
+        <div class="invalid-feedback">
+            Please provide a project intro.
+        </div>
+        @else
+        <div class="valid-feedback">
+            Amazing!
+        </div>
+        @endif
+    </div>
+
+
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Project Description</label>
         <textarea
             class="form-control {{$errors->any() ? $errors->has('project_description') ? 'is-invalid': 'is-valid' : ''}}"
-            id="exampleFormControlTextarea1" rows="6" name="project_description"
-            value="{{old('project_description')}}">{{old('project_description')}}</textarea>
+            id="textarea_description" rows="6" name="project_description"
+            value="{{old('project_description',$project->description)}}">{{old('project_description',$project->description)}}</textarea>
         @if ($errors->has('project_description'))
         <div class="invalid-feedback">
             Please provide a project description.
@@ -158,7 +177,8 @@
                 </div>
                 <input type="number"
                     class="form-control  {{$errors->any() ? $errors->has('legendary_price') ? 'is-invalid': 'is-valid' : ''}}"
-                    aria-label="Amount (to the nearest euro)" name="legendary_price" value="{{old('legendary_price')}}">
+                    aria-label="Amount (to the nearest euro)" name="legendary_price"
+                    value="{{old('legendary_price',$pledges[0]->price)}}">
                 <div class="input-group-append">
                     <span class="input-group-text">.00</span>
                 </div>
@@ -178,7 +198,8 @@
                 </div>
                 <textarea
                     class="form-control {{$errors->any() ? $errors->has('legendary_info') ? 'is-invalid': 'is-valid' : ''}}"
-                    name="legendary_info" value="{{old('legendary_info')}}">Free Gold</textarea>
+                    name="legendary_info"
+                    value="{{old('legendary_info',$pledges[0]->description)}}">Free Gold</textarea>
                 @if ($errors->has('legendary_info'))
                 <div class="invalid-feedback">
                     Please provide information about Legendary Pledge.
@@ -198,8 +219,9 @@
                     <span class="input-group-text">F.</span>
                 </div>
                 <input type="number"
-                    class="form-control {{$errors->any() ? $errors->has('epic_price') ? 'is-invalid': 'is-valid' : ''}}"
-                    aria-label="Amount (to the nearest euro)" name="epic_price" value="{{old('epic_price')}}">
+                    class="form-control {{$errors->any() ? $errors->has('epic_price',$pledges[1]->price) ? 'is-invalid': 'is-valid' : ''}}"
+                    aria-label="Amount (to the nearest euro)" name="epic_price"
+                    value="{{old('epic_price',$pledges[1]->price)}}">
                 <div class="input-group-append">
                     <span class="input-group-text">.00</span>
                 </div>
@@ -220,7 +242,8 @@
                 </div>
                 <textarea
                     class="form-control {{$errors->any() ? $errors->has('epic_info') ? 'is-invalid': 'is-valid' : ''}}"
-                    aria-label="With textarea" name="epic_info" value="{{old('epic_info')}}">Free Silver</textarea>
+                    aria-label="With textarea" name="epic_info"
+                    value="{{old('epic_info',$pledges[1]->description)}}">Free Silver</textarea>
                 @if ($errors->has('epic_info'))
                 <div class="invalid-feedback">
                     Please provide information about Epic Pledge.
@@ -240,8 +263,9 @@
                     <span class="input-group-text">F.</span>
                 </div>
                 <input type="number"
-                    class="form-control {{$errors->any() ? $errors->has('rare_price') ? 'is-invalid': 'is-valid' : ''}}"
-                    aria-label="Amount (to the nearest euro)" name="rare_price" value="{{old('rare_price')}}">
+                    class="form-control {{$errors->any() ? $errors->has('rare_price',$pledges[2]->price) ? 'is-invalid': 'is-valid' : ''}}"
+                    aria-label="Amount (to the nearest euro)" name="rare_price"
+                    value="{{old('rare_price',$pledges[2]->price)}}">
                 <div class="input-group-append">
                     <span class="input-group-text">.00</span>
                 </div>
@@ -262,7 +286,8 @@
                 </div>
                 <textarea
                     class="form-control {{$errors->any() ? $errors->has('rare_info') ? 'is-invalid': 'is-valid' : ''}}"
-                    aria-label="With textarea" name="rare_info" value="{{old('rare_info')}}">Free Bronse</textarea>
+                    aria-label="With textarea" name="rare_info"
+                    value="{{old('rare_info',$pledges[2]->description)}}">Free Bronse</textarea>
                 @if ($errors->has('rare_info'))
                 <div class="invalid-feedback">
                     Please provide information about Rare Pledge.
