@@ -1,16 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 // Route::get('/', function () {
 //     return view('emails/mail');
 // });
@@ -19,7 +7,6 @@ Route::name('mails.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/mail', 'MailsController@getIndex')->name('index');
     Route::post('/emails/mail_confirmed', 'MailsController@sendMail')->name('send');
 });
-
 
 Route::name('news.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/news', 'NewsController@getIndex')->name('index');
@@ -55,7 +42,6 @@ Route::name('comments.')->group(function () {
     Route::post('/projects/savecomment', 'CommentsController@postComment')->name('save');
 });
 
-// dynamic routes
 Route::name('pages.')->group(function () {
     Route::get('/', 'PagesController@getIndex')->name('home');
     Route::get('/about', 'PagesController@getAbout')->name('about');
@@ -63,20 +49,15 @@ Route::name('pages.')->group(function () {
     Route::get('/privacy', 'PagesController@getPrivacy')->name('privacy');
 });
 
-
 Route::name('shop.')->group(function () {
     Route::get('/shop', 'ShopItemsController@getIndex')->name('index');
     Route::post('/shop/confirmed', 'ShopItemsController@postConfirmed')->name('confirmed');
 });
 
-
 Route::name('stripe.')->group(function () {
     Route::get('/payment', 'PaymentController@getStripeForm')->name('index');
     Route::post('/confirm', 'PaymentController@postStripePayment')->name('confirm');
 });
-
-
-
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

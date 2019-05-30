@@ -107,14 +107,11 @@ class ProjectsController extends Controller
         ];
 
         //$validator = Validator::make($request->all(), $rules);
-       
         // if ($validator->fails()) {
         //     return Redirect::back();
         // };
         //form validation
-        request()->validate($rules);
-        
-        
+        request()->validate($rules);     
        
         $coverImagePath = "../images/" . $request->file('images')[0]->getClientOriginalName();
         //project handles
@@ -133,13 +130,10 @@ class ProjectsController extends Controller
 
         $dataProject['start_date'] = \DateTime::createFromFormat('d-m-Y', $dataProject['start_date']);
         $dataProject['end_date'] = \DateTime::createFromFormat('d-m-Y', $dataProject['end_date']);
-
         
         //last added project id
         $lastEditProject = Project::UpdateOrCreate(['id' => $project_id], $dataProject);
         $currentProjectId = $lastEditProject->id;
-
-
         
         //images handles
         $data= [];
@@ -167,8 +161,6 @@ class ProjectsController extends Controller
             'category_id'   => request('project_category'),
         ];
         CategoryProject::UpdateOrCreate(['project_id' => $currentProjectId], $categoryProject);
-
-
 
         //insert pledges for current project
         $l_pledge = [

@@ -92,8 +92,13 @@
                 <!-- Links -->
                 <h6 class="text-uppercase font-weight-bold">Contact</h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+
                 <p class="white-text">
-                    <i data-feather="map-pin"></i> Ghent, West-Fladers 9000, BE</p>
+                    <i data-feather="instagram"></i> instagram/fundtime</p>
+                <p class="white-text">
+                    <i data-feather="facebook"></i> facebook/fundtime</p>
+                <p class="white-text">
+                    <i data-feather="map-pin"></i> Gent, West-Fladers 9000, BE</p>
                 <p class="white-text">
                     <i data-feather="mail"></i> info@fundtime.com</p>
                 <p class="white-text">

@@ -13,8 +13,10 @@
     <div class="form-row">
         <div class="col-md-4 mb-3">
             <label for="validationServer01">News Title</label>
-            <input type="text" class="form-control is-valid" id="validationServer01" placeholder="News Title"
-                value="Mark 55" required name="news_title">
+            <input type="text"
+                class="form-control {{$errors->any() ? $errors->has('news_title') ? 'is-invalid': 'is-valid' : ''}}"
+                id="validationServer01" placeholder="News Title" value="" name="news_title">
+
             @if ($errors->has('news_title'))
             <div class="invalid-feedback">
                 Please provide a news title.
