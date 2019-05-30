@@ -466,6 +466,10 @@
 /* ==========================================================================
    $DEFAULT-DATE-PICKER
    ========================================================================== */
+body {
+  font-size: 1.1rem;
+}
+
 h1,
 h2,
 h3,
@@ -473,12 +477,16 @@ h4 {
   margin-top: 20px !important;
 }
 
+.navbar-brand img {
+  height: 60px;
+}
+
 .white-text {
   color: white !important;
 }
 
 .body__content {
-  margin-top: 50px !important;
+  margin-top: 80px !important;
   display: flex !important;
   flex-wrap: wrap !important;
   justify-content: space-between !important;
@@ -571,6 +579,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .pledges-container {

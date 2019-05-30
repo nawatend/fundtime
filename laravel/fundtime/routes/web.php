@@ -51,6 +51,10 @@ Route::name('backers.')->group(/*['middleware' => ['auth']], */function () {
     Route::post('/projects/savefund', 'BackersController@postBacker')->name('save');
 });
 
+Route::name('comments.')->group(function () {
+    Route::post('/projects/savecomment', 'CommentsController@postComment')->name('save');
+});
+
 // dynamic routes
 Route::name('pages.')->group(function () {
     Route::get('/', 'PagesController@getIndex')->name('home');
@@ -70,6 +74,8 @@ Route::name('stripe.')->group(function () {
     Route::get('/payment', 'PaymentController@getStripeForm')->name('index');
     Route::post('/confirm', 'PaymentController@postStripePayment')->name('confirm');
 });
+
+
 
 
 Auth::routes();

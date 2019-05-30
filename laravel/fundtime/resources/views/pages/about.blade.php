@@ -1,7 +1,7 @@
 @extends('layout')
 
 
-@section("title",'Home')
+@section("title",'About')
 
 @section('content')
 
@@ -13,7 +13,7 @@
 
     <div class="container marketing">
         <!-- START THE FEATURETTES -->
-        <h1>About Us</h1>
+        <h1>About Fund Time</h1>
         <hr class="featurette-divider">
 
         <div class="row featurette">

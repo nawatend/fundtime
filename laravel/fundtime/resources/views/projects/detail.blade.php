@@ -5,19 +5,22 @@
 
 @section('content')
 <div class="project_title">
-    <div style="width: 80%;">
+    <div style="width: 60%;">
         <h1>{{$project->title}}</h1>
     </div>
+    <div class="actions">
+        <a href=""><button class="btn btn-success" type="submit">Download PDF</button></a>
+        @if(Auth::check() && $project->user_id == $user->id)
 
-    @if(Auth::check() && $project->user_id == $user->id)
+        <a href="{{route('projects.edit', $project->id)}}"><button class="btn btn-primary" type="submit">Edit
+                Project</button></a>
 
-    <a href="{{route('projects.edit', $project->id)}}"><button class="btn btn-primary" type="submit">Edit
-            Project</button></a>
+        <a href="{{route('projects.delete', $project->id)}}"><button class="btn btn-danger" type="submit">Delete
+            </button></a>
 
-    <a href="{{route('projects.delete', $project->id)}}"><button class="btn btn-danger" type="submit">Delete
-        </button></a>
+        @endif
+    </div>
 
-    @endif
 </div>
 @if (Session::has('message'))
 <div class="alert alert-danger">{{ Session::get('message') }}</div>
@@ -173,8 +176,35 @@
                 @endforeach
             </tbody>
         </table>
-
     </div>
 </div>
 <!-- Project Heros list end -->
+
+
+
+<div class="container">
+    <h2>Comments</h2>
+    <form action="{{ route('comments.save') }}" method="post" style="width:100%;">
+        @csrf
+        <input type="hidden" name="project_id" value="{{ $project->id }}" />
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Message</label>
+            <textarea class="form-control is-invalid" rows="4" maxlength="400"
+                name="message"> {{old('message',$comment->message) }}</textarea>
+
+            @if ($errors->has('message'))
+            <div class="invalid-feedback">
+                Please provide a message.
+            </div>
+            @else
+            <div class="valid-feedback">
+                Amazing!
+            </div>
+            @endif
+        </div>
+
+        <button class="btn btn-primary" type="submit">send comment</button>
+    </form>
+</div>
 @endsection

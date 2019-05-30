@@ -10,6 +10,7 @@ use App\Models\ProjectImage;
 use App\Models\Category;
 use App\Models\CategoryProject;
 use App\Models\Backer;
+use App\Models\Comment;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -57,7 +58,7 @@ class ProjectsController extends Controller
 
         return view('projects.edit', compact('project', 'pledges', 'categories'));
     }
-    public function getDetail($project_id)
+    public function getDetail($project_id, Comment $comment)
     {
         $project = Project::find($project_id);
         $images = ProjectImage::where('project_id', $project_id)->get();
@@ -76,7 +77,7 @@ class ProjectsController extends Controller
         // if(!$project->id) abort('404');
     
         
-        return view('projects.detail', compact('backers', 'user', 'project', 'images', 'pledges', 'pledgeLegendary', 'pledgeEpic', 'pledgeRare'));
+        return view('projects.detail', compact('comment', 'backers', 'user', 'project', 'images', 'pledges', 'pledgeLegendary', 'pledgeEpic', 'pledgeRare'));
     }
 
     public function postSave()
