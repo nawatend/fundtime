@@ -20,8 +20,7 @@
     @endif
 </div>
 
-<!-- images  -->
-<!-- images -->
+
 
 
 
@@ -29,6 +28,14 @@
 
 <!-- Project Information -->
 <div class="container">
+
+    <!-- images  -->
+    <div class="">
+        <img class="d-block w-100 slide-image" src="../{{$new->image_path}}" alt="First slide">
+    </div>
+
+    <!-- images end -->
+
     <!-- intro -->
     <h2>Intro</h2>
     <hr class="featurette-divider">
