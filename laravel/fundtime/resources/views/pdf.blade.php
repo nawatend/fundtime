@@ -258,18 +258,22 @@
 
             </div>
 
-            <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 70%;" aria-valuenow="70"
-                    aria-valuemin="0" aria-valuemax="100">70%</div>
-                <div class="progress-bar bg-error" role="progressbar" style="width: 30%;" aria-valuenow="30"
-                    aria-valuemin="0" aria-valuemax="100">30%</div>
+
+            <div class="">
+                <div>
+                    <h4>Goal: {{$project->target_amount}} F's</h4>
+                    <h4>We Have: {{$project->funded_amount}} F's</h4>
+                </div>
+                <div>
+                    <h5>End Date: {{$project->end_date}}</h5>
+                </div>
             </div>
 
-
+            <div>
+                <h2>Images</h2>
+            </div>
             <div class="images">
-                <div>
-                    <h2>Images</h2>
-                </div>
+
                 @foreach ($images as $image)
                 <img src="{{public_path('images/' . $image->image_path)}}" alt="">
                 @endforeach

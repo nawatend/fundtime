@@ -27,7 +27,7 @@
     @if($project->user_id == $user->id)
     <div class="col-sm-6 col-md-4 py-2">
         <div class="card h-100" style="width: 100%;">
-            <img src="{{$project->cover_image_path}}" class="card-img-top" alt="...">
+            <img src="{{$project->cover_image_path}}" class="o-card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{$project->title}}</h5>
                 <p class="card-text">{{$project->intro}}</p>

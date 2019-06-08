@@ -11,10 +11,9 @@ class PagesController extends Controller
 {
     public function getIndex()
     {
-        $pageData = Page::where('id', 1)->first();
         $projects = Project::all();
       
-        return view('pages.home')->with(compact('pageData', 'projects'));
+        return view('pages.home')->with(compact('projects'));
     }
 
     public function getAbout()

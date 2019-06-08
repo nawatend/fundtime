@@ -40,7 +40,7 @@
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="validationServer02">Target amount(EUR)</label>
+            <label for="validationServer02">Target amount in F's(1 EUR = 10 F's)</label>
             <input type="number"
                 class="form-control {{$errors->any() ? $errors->has('project_target_amount') ? 'is-invalid': 'is-valid' : ''}}"
                 min="0" id="validationServer02" placeholder="Target amount of money" name="project_target_amount"
@@ -169,7 +169,7 @@
         <ul class="list-unstyled mt-3 mb-4">
             <li class="alert alert-info"> 1 euro = 10 F's</li>
         </ul>
-        <div class="input-group bg-legendary myCard">
+        <div class="input-group bg-legendary o-myCard">
             <h6>Pledge Legendary</h6>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -212,7 +212,7 @@
             </div>
         </div>
 
-        <div class="input-group bg-epic myCard">
+        <div class="input-group bg-epic o-myCard">
             <h6>Pledge Epic</h6>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -256,7 +256,7 @@
             </div>
         </div>
 
-        <div class="input-group bg-rare myCard">
+        <div class="input-group bg-rare o-myCard">
             <h6>Pledge Rare</h6>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">

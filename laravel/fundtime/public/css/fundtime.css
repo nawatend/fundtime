@@ -468,6 +468,7 @@
    ========================================================================== */
 body {
   font-size: 1.1rem;
+  background: url(/images/bg2.svg?eeec56a8b8056bf37821fb6af12feab1) center center fixed;
 }
 
 h1,
@@ -486,7 +487,7 @@ h4 {
   margin-left: 5px !important;
 }
 
-.navbar-brand img {
+.o-navbar-brand img {
   height: 60px;
 }
 
@@ -500,6 +501,7 @@ h4 {
   flex-wrap: wrap !important;
   justify-content: space-between !important;
   padding: 30px !important;
+  min-height: 80vh !important;
 }
 
 .progress {
@@ -567,13 +569,13 @@ p {
   color: white;
 }
 
-.card-img-top {
+.o-card-img-top {
   max-height: 350px;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.myCard {
+.o-myCard {
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 3px;
@@ -588,7 +590,7 @@ p {
   height: 550px;
 }
 
-.project_title {
+.o-project_title {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -604,12 +606,12 @@ p {
   min-width: 220px;
 }
 
-.card-horizontal {
+.o-card-horizontal {
   display: flex;
   flex: 1 1 auto;
 }
 
-.card-horizontal img {
+.o-card-horizontal img {
   height: 180px;
 }
 

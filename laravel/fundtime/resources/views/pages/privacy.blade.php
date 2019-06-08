@@ -4,9 +4,11 @@
 @section("title",'Privacy')
 
 @section('content')
+{!! $pageData->content !!}
 
+@endsection
 
-<h1>Privacy Policy</h1>
+<!-- <h1>Privacy Policy</h1>
 <p>Effective date: April 12, 2019</p>
 <p>fundtime ("us", "we", or "our") operates the www.fundtime.com website (the "Service").</p>
 <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our
@@ -127,6 +129,4 @@
 <h2>Contact Us</h2>
 <p>If you have any questions about this Privacy Policy, please contact us:</p>
 <ul>
-    <li>By email: n.tendar@gmail.com</li>
-
-    @endsection
+    <li>By email: n.tendar@gmail.com</li> -->

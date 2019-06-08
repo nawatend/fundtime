@@ -5,14 +5,12 @@
 
 @section('content')
 
-<main role="main">
+{!! $pageData->content !!}
 
-    <!-- Marketing messaging and featurettes
-================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
+@endsection
+<!-- <main role="main">
     <div class="container marketing">
-        <!-- START THE FEATURETTES -->
+      
         <h1>About Fund Time</h1>
         <hr class="featurette-divider">
 
@@ -84,16 +82,11 @@
 
         <hr class="featurette-divider">
 
-        <!-- /END THE FEATURETTES -->
+        
 
-    </div><!-- /.container -->
+    </div>
 
-
-    <!-- FOOTER -->
     <footer class="container">
         <p class="float-right"><a href="#">Back to top</a></p>
-
     </footer>
-</main>
-
-@endsection
+</main> -->

@@ -27,7 +27,7 @@ class CreateProjectsTable extends Migration
             $table->integer('layer')->default(0);
             $table->date('start_date');
             $table->date('end_date');
-            $table->date('promotion_start_date')->default(null);
+            $table->date('promotion_start_date')->nullable();
             $table->string('cover_image_path');
             $table->timestamps();
         });

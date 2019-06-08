@@ -4,7 +4,7 @@
 @section("title",'Project')
 
 @section('content')
-<div class="project_title">
+<div class="o-project_title">
     <div style="width: 60%;">
         <h1>{{$project->title}}</h1>
     </div>

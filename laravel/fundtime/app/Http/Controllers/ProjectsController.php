@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
-use App\Models\User;
+use App\User;
 use App\Models\Pledge;
 use App\Models\ProjectImage;
 use App\Models\Category;
 use App\Models\CategoryProject;
 use App\Models\Backer;
 use App\Models\Comment;
+
 use Auth;
 use Session;
 
@@ -66,8 +67,10 @@ class ProjectsController extends Controller
     
     public function getCreate(Project $project, Pledge $pledge)
     {
+        $user = Auth::user();
         $categories = Category::all();
         $pledges = [$pledge,$pledge,$pledge];
+        
         return view('projects.edit', compact('user', 'project', 'pledges', 'categories'));
     }
 
@@ -239,7 +242,6 @@ class ProjectsController extends Controller
 
     public function getPromote($project_id, $layer_id)
     {
-        //date("Y-m-d")
         $currentUser = Auth::user();
         $project = Project::find($project_id);
 
@@ -296,6 +298,11 @@ class ProjectsController extends Controller
     public function destroy($project_id)
     {
         $project = Project::find($project_id);
+        $currentUser = User::find($project->user_id);
+        //all f's earn goes to account
+        $currentUser->credits += $project->funded_amount;
+        $currentUser->save();
+        
 
         $project->delete();
      

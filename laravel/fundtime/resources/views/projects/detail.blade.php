@@ -4,21 +4,22 @@
 @section("title",'Project')
 
 @section('content')
-<div class="project_title">
+<div class="o-project_title">
     <div style="width: 60%;">
         <h1>{{$project->title}}</h1>
     </div>
     <div class="actions">
         <a href="{{route('generatePDF', $project->id)}}"><button class="btn btn-success" type="submit">Download
                 PDF</button></a>
-        @if(Auth::check() && $project->user_id == $user->id || $user->role == 'admin' )
+        @if(Auth::check())
+        @if($project->user_id == $user->id || $user->role == 'admin' )
 
         <a href="{{route('projects.edit', $project->id)}}"><button class="btn btn-primary" type="submit">Edit
                 Project</button></a>
 
         <a href="{{route('projects.delete', $project->id)}}"><button class="btn btn-danger" type="submit">Delete
             </button></a>
-
+        @endif
         @endif
     </div>
 
@@ -195,6 +196,7 @@
 
 <div class="container">
     <h2>Comments</h2>
+    @if(Auth::check())
     <form action="{{ route('comments.save') }}" method="post" style="width:100%;">
         @csrf
         <input type="hidden" name="project_id" value="{{ $project->id }}" />
@@ -218,12 +220,12 @@
 
         <button class="btn btn-primary" type="submit">send comment</button>
     </form>
-
+    @endif
     <div class="comment row">
         <div class="col-sm-12 col-md-8 mt-3">
             @foreach($comments as $comment)
             <div class="card">
-                <div class="card-horizontal">
+                <div class="o-card-horizontal">
                     <div class="card-body bg-g-teal">
                         <h4 class="card-title ">From: {{$comment->name}}</h4>
                         <p class="card-text">"{{$comment->message}}"</p>
