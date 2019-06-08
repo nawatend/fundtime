@@ -24,6 +24,7 @@ class CreateProjectsTable extends Migration
             $table->longText('description');
             $table->integer('target_amount')->unsigned();
             $table->integer('funded_amount')->unsigned();
+            $table->integer('layer')->default(0);
             $table->date('start_date');
             $table->date('end_date');
             $table->string('cover_image_path');

@@ -26,7 +26,16 @@
             <div class="card-body">
                 <h5 class="card-title">{{$project->title}}</h5>
                 <p class="card-text">{{$project->intro}}</p>
-                <a href="{{route('projects.detail', $project->id)}}" class="btn btn-primary">Go somewhere</a>
+                <a href="{{route('projects.detail', $project->id)}}" class="btn btn-primary">View Project</a>
+                <a class=" btn btn-warning dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Promote
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{route('projects.promote',[$project->id, 1])}}">To Layer: 1</a>
+                    <a class="dropdown-item" href="{{route('projects.promote',[$project->id, 2])}}">To Layer: 2</a>
+                    <a class="dropdown-item" href="{{route('projects.promote',[$project->id, 3])}}">To Layer: 3</a>
+                </div>
             </div>
         </div>
     </div>

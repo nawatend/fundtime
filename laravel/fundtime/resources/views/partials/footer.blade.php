@@ -58,10 +58,8 @@
                 <!-- Content -->
                 <h6 class="text-uppercase font-weight-bold">Fund Time</h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p class="white-text">Here you can use rows and columns here to organize your footer content. Lorem
-                    ipsum dolor sit amet,
-                    consectetur
-                    adipisicing elit.</p>
+                <p class="white-text">FundTime is an enormous global community built around creativity and creative
+                    projects. Over 10 million people, from every continent on earth, have backed a FundTime project.</p>
 
             </div>
             <!-- Grid column -->
@@ -75,13 +73,10 @@
                 <h6 class="text-uppercase font-weight-bold">Useful links</h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
 
-
                 <p>
                     <a class="dark-grey-text white-text" href="{{route('pages.privacy')}}">Privacy</a>
                 </p>
-                <p>
-                    <a class="dark-grey-text white-text" href="#!">Help</a>
-                </p>
+
 
             </div>
             <!-- Grid column -->

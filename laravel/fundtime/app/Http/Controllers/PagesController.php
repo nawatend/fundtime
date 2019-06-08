@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Page;
+use App\Models\Project;
 use Auth;
 
 class PagesController extends Controller
@@ -11,8 +12,9 @@ class PagesController extends Controller
     public function getIndex()
     {
         $pageData = Page::where('id', 1)->first();
+        $projects = Project::all();
       
-        return view('pages.home')->with(compact('pageData'));
+        return view('pages.home')->with(compact('pageData', 'projects'));
     }
 
     public function getAbout()

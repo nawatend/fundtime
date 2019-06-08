@@ -12,6 +12,7 @@ class CategoryController extends Controller
         $projects = $category->projects;
         $categories = Category::all();
        
+   
         return view('projects.index', compact('categories', 'projects'));
     }
 }

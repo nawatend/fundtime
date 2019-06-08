@@ -6,23 +6,28 @@ use Illuminate\Http\Request;
 
 use App\Mail\SendMail;
 use Mail;
+use App\Http\Controllers\Traits\SendMailTrait;
 
 class MailsController extends Controller
 {
     //
+    use SendMailTrait;
 
 
 
-
-    public function sendMail()
+    public function send()
     {
-        $data = array('name' => 'Frederick Roegiers', 'body' => "Mailgun is successfully implemented. <br><br>World Peace");
+        $mailData = [
+            'mail_type' => 'new_user',
+            'mail_info' => 'Registration Success!',
+            'name' => 'User name',
+            'email' => 'user@gmail.com',
+            'body' => "Registration Success!",
+        ];
 
-        Mail::send('emails.mail_template', $data, function ($message) {
-            $message->to('frederick.roegiers@arteveldehs.be', 'Frederick Roegiers')->subject('Mailgun is successfully implemented');
-        });
-        //Mail::to('n.tendar@gmail.com')->send(new SendMail);
-        return view("emails.mail_confirmed");
+        $this->sendMail($mailData);
+        //return back();
+        return back();
     }
 }
 //frederick.roegiers@arteveldehs.be

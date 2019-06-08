@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="{{ asset('css/fundtime.css') }}">
 </head>
 
-<body>
+<body class="">
 
     @include('partials/header')
 
-    <div id="app" class="container body__content">
+    <div id="app" class="container body__content ">
         <div style="width:100%;">
             @yield('content')
         </div>

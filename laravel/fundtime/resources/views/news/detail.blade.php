@@ -8,8 +8,16 @@
     <div style="width: 80%;">
         <h1>{{$new->title}}</h1>
     </div>
-    <a href="{{route('news.edit', $new->id)}}"><button class="btn btn-primary" type="submit">Edit
-            News</button></a>
+
+    @if( Auth::check() && $user->role == "admin")
+    <a href="{{route('news.delete', $new->id)}}">
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </a>
+    <a href="{{route('news.edit', $new->id)}}">
+        <button class="btn btn-primary" type="submit">Edit
+            News</button>
+    </a>
+    @endif
 </div>
 
 <!-- images  -->

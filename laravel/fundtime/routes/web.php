@@ -5,7 +5,7 @@
 
 Route::name('mails.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/mail', 'MailsController@getIndex')->name('index');
-    Route::post('/emails/mail_confirmed', 'MailsController@sendMail')->name('send');
+    Route::post('/emails/mail_confirmed', 'MailsController@send')->name('send');
 });
 
 Route::name('news.')->group(/*['middleware' => ['auth']], */function () {
@@ -14,6 +14,7 @@ Route::name('news.')->group(/*['middleware' => ['auth']], */function () {
     Route::post('/news/save', 'NewsController@postSave')->name('save');
     Route::get('/news/edit/{news_id}', 'NewsController@getEdit')->name('edit');
     Route::get('/news/detail/{news_id}', 'NewsController@getDetail')->name('detail');
+    Route::get('/news/delete/{news_id}', 'NewsController@destroy')->name('delete');
 });
 
 Route::name('profile.')->group(/*['middleware' => ['auth']], */function () {
@@ -29,7 +30,9 @@ Route::name('projects.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/projects/detail/{projectId}', 'ProjectsController@getDetail')->name('detail');
     Route::post('/projects/save', 'ProjectsController@postSave')->name('save');
     Route::get('/projects/delete/{projectId}', 'ProjectsController@destroy')->name('delete');
+    Route::get('/promote/projectId={projectId}/layerId={layerId}', 'ProjectsController@getPromote')->name('promote');
 });
+
 Route::name('categories.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/projects/categories/{category}', 'CategoryController@getIndex')->name('index');
 });
@@ -61,3 +64,5 @@ Route::name('stripe.')->group(function () {
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/generate-pdf/{project_id}', 'HomeController@generatePDF')->name('generatePDF');

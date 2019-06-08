@@ -1,0 +1,222 @@
+:root {
+    --blue: #085f63;
+    --indigo: #6574cd;
+    --purple: #9561e2;
+    --pink: #f66D9b;
+    --red: #ff5959;
+    --orange: #f6993f;
+    --yellow: #facf5a;
+    --green: #38c172;
+    --teal: #20c997;
+    --cyan: #6cb2eb;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #085f63;
+    --secondary: #6c757d;
+    --success: #38c172;
+    --info: #6cb2eb;
+    --warning: #facf5a;
+    --danger: #ff5959;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: "Montserrat", sans-serif;
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+h1 {
+    font-family: "Montserrat", sans-serif;
+}
+
+.container {
+    width: 100%;
+}
+
+.progress {
+    width: 100%;
+}
+
+.progress-bar {
+    height: 35px;
+
+}
+
+.bg-success {
+    background-color: var(--green);
+}
+
+.bg-error {
+    background-color: var(--red);
+}
+
+
+.project_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.pledges-container {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.card-deck {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.card {
+    width: 30%;
+}
+
+.bg-legendary {
+    background-color: #ffc15e !important;
+    color: white;
+}
+
+.bg-epic {
+    background-color: #8158fc !important;
+    color: white;
+}
+
+.bg-rare {
+    background-color: #207dff !important;
+    color: white;
+}
+
+
+.body__content {
+    margin-top: 80px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    padding: 30px !important;
+}
+
+.progress {
+    margin-top: 20px;
+    height: 35px;
+}
+
+.table {
+    margin-left: 20px !important;
+}
+
+p {
+    word-break: break-all !important;
+    white-space: normal !important;
+}
+
+.bg-success {
+    background-color: #2BBBAD !important;
+}
+
+.bg-error {
+    background-color: #ff5959 !important;
+}
+
+.bg-teal {
+    background-color: #2BBBAD !important;
+}
+
+.bg-g-teal {
+    background-image: linear-gradient(to bottom right, #2BBBAD, #108178) !important;
+    color: white;
+}
+
+.bg-g-legendary {
+    background-image: linear-gradient(to right, #FFB75E, #ffc15e) !important;
+    color: white;
+}
+
+.bg-g-epic {
+    background-image: linear-gradient(to right, #8158fc, #926ffa) !important;
+    color: white;
+}
+
+.bg-g-rare {
+    background-image: linear-gradient(to right, #207dff, #2948ff) !important;
+    color: white;
+}
+
+.bg-legendary {
+    background-color: #ffc15e !important;
+    color: white;
+}
+
+.bg-epic {
+    background-color: #8158fc !important;
+    color: white;
+}
+
+.bg-rare {
+    background-color: #207dff !important;
+    color: white;
+}
+
+.card-img-top {
+    max-height: 350px;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.myCard {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 3px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.slide-image {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    width: 100%;
+    height: 550px;
+}
+
+.project_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.pledges-container {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.card-deck {
+    width: 30%;
+}
+
+.card-deck .card {
+    min-width: 220px;
+
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.card-horizontal img {
+    height: 180px;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+h3 {
+    text-transform: capitalize;
+}

@@ -29,6 +29,20 @@
 
 <hr class="featurette-divider">
 <div class="row">
+    @if($projects->isEmpty())
+
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Oh Dear!</h4>
+        <p>Son, nothing to see here! <span class='text-bold'></span>.
+            <span class='text-bold'> Check out other category </span></p>
+        <hr>
+        <p class="mb-0">Shall we explore some other innovative projects?</p>
+        <br>
+        <a href="{{route('projects.index')}}"><button class="btn btn-success" type="submit">Explore
+                Innovations</button></a>
+
+    </div>
+    @endif
     @foreach($projects as $project)
     <div class="col-sm-6 col-md-4 py-2">
         <div class="card h-100" style="width: 100%;">
@@ -37,10 +51,21 @@
                 <h5 class="card-title">{{$project->title}}</h5>
                 <p class="card-text">{{$project->intro}}</p>
                 <a href="{{route('projects.detail', $project->id)}}" class="btn btn-primary">View Project</a>
+
+                @if(Auth::check() && Auth::user()->id == $project->user_id )
+                <a class=" btn btn-warning dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Promote
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{route('projects.promote',[$project->id, 1])}}">To Layer: 1</a>
+                    <a class="dropdown-item" href="{{route('projects.promote',[$project->id, 2])}}">To Layer: 2</a>
+                    <a class="dropdown-item" href="{{route('projects.promote',[$project->id, 3])}}">To Layer: 3</a>
+                </div>
+                @endif
             </div>
         </div>
     </div>
-
     @endforeach
 </div>
 

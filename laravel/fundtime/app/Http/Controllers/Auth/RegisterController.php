@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Traits\SendMailTrait;
 
 class RegisterController extends Controller
 {
@@ -22,13 +23,14 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use SendMailTrait;
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -63,6 +65,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $mailData = [
+            'mail_type' => 'new_user',
+            'mail_info' => 'Registration',
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'body' => "Registration Success!",
+        ];
+
+
+        $this->sendMail($mailData);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

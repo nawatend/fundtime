@@ -519,6 +519,10 @@ p {
   background-color: #2BBBAD !important;
 }
 
+.bg-g-teal-b {
+  background-image: linear-gradient(to bottom, white, white, white, #2BBBAD) !important;
+}
+
 .bg-g-teal {
   background-image: linear-gradient(to bottom right, #2BBBAD, #108178) !important;
   color: white;

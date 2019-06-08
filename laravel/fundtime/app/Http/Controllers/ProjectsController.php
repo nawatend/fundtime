@@ -12,6 +12,7 @@ use App\Models\CategoryProject;
 use App\Models\Backer;
 use App\Models\Comment;
 use Auth;
+
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Redirect;
@@ -68,6 +69,11 @@ class ProjectsController extends Controller
         $pledges = Pledge::where('project_id', $project_id)->get();
         $user = Auth::user();
 
+        $comments = DB::table('comments')
+        ->where('project_id', $project_id)
+        ->join('users', 'comments.user_id', '=', 'users.id')
+        ->orderBy('comments.created_at', 'DESC')->paginate(5);
+     
         $backers = DB::table('backers')
         ->join('users', 'backers.user_id', '=', 'users.id')
         ->join('pledges', 'backers.pledge_id', '=', 'pledges.id')
@@ -75,9 +81,21 @@ class ProjectsController extends Controller
         //dd($images);
         // check if project exists
         // if(!$project->id) abort('404');
-    
+
+        $funded_perc = 0;
+        $not_funded_perc = 0;
+
+        if ($project->funded_amount >= 0) {
+            $funded_perc = round($project->funded_amount / $project->target_amount * 100, 2);
+            $not_funded_perc = round(100 - $funded_perc, 2);
+            if ($not_funded_perc < 0) {
+                $not_funded_perc = 0;
+            }
+        }
         
-        return view('projects.detail', compact('comment', 'backers', 'user', 'project', 'images', 'pledges', 'pledgeLegendary', 'pledgeEpic', 'pledgeRare'));
+        //dd($funded_perc . " - " . $not_funded_perc);
+        
+        return view('projects.detail', compact('funded_perc', 'not_funded_perc', 'comments', 'comment', 'backers', 'user', 'project', 'images', 'pledges', 'pledgeLegendary', 'pledgeEpic', 'pledgeRare'));
     }
 
     public function postSave()
@@ -111,7 +129,7 @@ class ProjectsController extends Controller
         //     return Redirect::back();
         // };
         //form validation
-        request()->validate($rules);     
+        request()->validate($rules);
        
         $coverImagePath = "../images/" . $request->file('images')[0]->getClientOriginalName();
         //project handles
@@ -194,6 +212,15 @@ class ProjectsController extends Controller
         return redirect()->route('projects.index');
     }
 
+    public function getPromote($project_id, $layer_id)
+    {
+        $currentUser = Auth::user();
+        $project = Project::find($project_id);
+
+        $project->layer = $layer_id;
+        $project->save();
+        return redirect()->route('projects.index');
+    }
 
     public function destroy($project_id)
     {

@@ -8,20 +8,6 @@
     <div style="width: 60%;">
         <h1>{{$project->title}}</h1>
     </div>
-    <div class="actions">
-        <a href="{{route('generatePDF', $project->id)}}"><button class="btn btn-success" type="submit">Download
-                PDF</button></a>
-        @if(Auth::check() && $project->user_id == $user->id || $user->role == 'admin' )
-
-        <a href="{{route('projects.edit', $project->id)}}"><button class="btn btn-primary" type="submit">Edit
-                Project</button></a>
-
-        <a href="{{route('projects.delete', $project->id)}}"><button class="btn btn-danger" type="submit">Delete
-            </button></a>
-
-        @endif
-    </div>
-
 </div>
 @if (Session::has('message'))
 <div class="alert alert-danger">{{ Session::get('message') }}</div>
@@ -59,22 +45,12 @@
 <!-- images slider end-->
 
 <!-- Progress Bar start -->
-
-
-<div class="">
-    <div>
-        <h4>Goal: {{$project->target_amount}} F's</h4>
-    </div>
-    <div>
-        <h5>End Date: {{$project->end_date}}</h5>
-    </div>
-</div>
-
 <div class="progress">
-    <div class="progress-bar bg-success" role="progressbar" style="width: {{$funded_perc}}%"
-        aria-valuenow="{{$funded_perc}}" aria-valuemin="0" aria-valuemax="100">{{$funded_perc}}%</div>
-    <div class="progress-bar bg-error" role="progressbar" style="width: {{$not_funded_perc}}%"
-        aria-valuenow="{{$not_funded_perc}}" aria-valuemin="0" aria-valuemax="100">{{$not_funded_perc}}%</div>
+
+    <div class="progress-bar bg-success" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0"
+        aria-valuemax="100">70%</div>
+    <div class="progress-bar bg-error" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0"
+        aria-valuemax="100">30%</div>
 </div>
 <!-- Progress Bar End -->
 
@@ -95,9 +71,7 @@
                 <input type="hidden" name="project_id" value="{{ $project->id }}" />
                 <input type="hidden" name="project_user_id" value="{{ $project->user_id }}" />
 
-                @if(Auth::check())
-                <input type="hidden" name="user_id" value="{{ $user->id }}" />
-                @endif
+
                 <div class="card-header bg-{{$pledge->slug}}">
                     <h4 class="my-0 font-weight-normal">{{$pledge->title}}</h4>
                 </div>
@@ -107,24 +81,9 @@
                         <li>{{$pledge->description}}</li>
 
                     </ul>
-                    @if(Auth::check())
-                    @if($project->user_id == $user->id)
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li class="alert alert-danger">You can't fund yourself!</li>
-                    </ul>
-                    @endif
-                    @if($project->user_id == $user->id)
-                    <button type="submit" class="btn btn-lg btn-block btn-outline-secondary" disabled>Fund it</button>
-                    @else
-                    <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Fund it</button>
-                    @endif
 
-                    @else
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li class="alert alert-info">Login To Fund This Project</li>
-                    </ul>
-                    <button type="submit" class="btn btn-lg btn-block btn-outline-secondary" disabled>Fund it</button>
-                    @endif
+                    <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Fund it</button>
+
                 </div>
             </form>
         </div>
@@ -193,52 +152,5 @@
 
 
 
-<div class="container">
-    <h2>Comments</h2>
-    <form action="{{ route('comments.save') }}" method="post" style="width:100%;">
-        @csrf
-        <input type="hidden" name="project_id" value="{{ $project->id }}" />
 
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Message</label>
-            <textarea
-                class="form-control {{$errors->any() ? $errors->has('message') ? 'is-invalid': 'is-valid' : ''}} col-sm-12 col-md-8"
-                rows="4" maxlength="400" name="message"> {{old('message',$comment->message) }}</textarea>
-
-            @if ($errors->has('message'))
-            <div class="invalid-feedback">
-                Please provide a message.
-            </div>
-            @else
-            <div class="valid-feedback">
-                Amazing!
-            </div>
-            @endif
-        </div>
-
-        <button class="btn btn-primary" type="submit">send comment</button>
-    </form>
-
-    <div class="comment row">
-        <div class="col-sm-12 col-md-8 mt-3">
-            @foreach($comments as $comment)
-            <div class="card">
-                <div class="card-horizontal">
-                    <div class="card-body bg-g-teal">
-                        <h4 class="card-title ">From: {{$comment->name}}</h4>
-                        <p class="card-text">"{{$comment->message}}"</p>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{$comment->created_at}}</small>
-                </div>
-            </div>
-
-            <br>
-            @endforeach
-            {{$comments->links()}}
-        </div>
-
-    </div>
-</div>
 @endsection

@@ -10,9 +10,6 @@ use App\Models\Comment;
 
 class CommentsController extends Controller
 {
-
-    
-
     public function postComment()
     {
         $project_id = (request('project_id')) ? request('project_id') : null;
@@ -21,13 +18,15 @@ class CommentsController extends Controller
         $rules = [
             'message' => 'required|max:400',
         ];
-
-        $comment = [
+        $message = request('message');
+        $newComment = [
             'user_id' => $user_id,
             'project_id' => $project_id,
             'message' => $message,
         ];
 
         Comment::Create($newComment);
+
+        return back();
     }
 }

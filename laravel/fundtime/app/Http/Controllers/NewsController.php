@@ -23,14 +23,22 @@ class NewsController extends Controller
     public function getEdit($news_id)
     {
         $news = News::find($news_id);
-        return view('news.edit', compact('news'));
+        $user = Auth::user();
+
+        if ($user->role == "admin") {
+            return view('news.edit', compact('news'));
+        } else {
+            return back();
+        }
     }
 
 
     public function getDetail($news_id)
     {
         $new = News::find($news_id);
-        return view('news.detail', compact('new'));
+        $user = Auth::user();
+
+        return view('news.detail', compact('new', 'user'));
     }
 
     public function postSave()
@@ -72,7 +80,17 @@ class NewsController extends Controller
         ];
         News::UpdateOrCreate(['id' => $news_id], $dataNews);
 
-     
+        
+        return redirect()->route('news.index');
+    }
+
+
+    public function destroy($news_id)
+    {
+        $news = News::find($news_id);
+        
+        $news->delete();
+        
         return redirect()->route('news.index');
     }
 }
