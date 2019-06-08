@@ -12,6 +12,7 @@ use App\Models\CategoryProject;
 use App\Models\Backer;
 use App\Models\Comment;
 use Auth;
+use Session;
 
 use Illuminate\Support\Facades\DB;
 
@@ -26,6 +27,18 @@ class ProjectsController extends Controller
         //sortBy
         $categories = Category::all()->sortBy("category_name");
         $projects = Project::all();
+
+        //check for outdated promotion
+        foreach ($projects as $project) {
+            if ($project->promotion_start_date != null) {
+                $promotion_end_date = strtotime("+1 week", strtotime($project->promotion_start_date));
+                $currentDate =  strtotime(date("Y-m-d"));
+                if ($currentDate > $promotion_end_date) {
+                    $project->promotion_start_date = null;
+                    $project->save();
+                }
+            }
+        }
         
         return view('projects.index', compact('projects', 'categories'));
     }
@@ -36,6 +49,18 @@ class ProjectsController extends Controller
         //sortBy
         $categories = Category::all()->sortBy("category_name");
         $projects = Project::all();
+        //check for outdated promotion
+        foreach ($projects as $project) {
+            if ($project->promotion_start_date != null) {
+                $promotion_end_date = strtotime("+1 week", strtotime($project->promotion_start_date));
+                $currentDate =  strtotime(date("Y-m-d"));
+                if ($currentDate > $promotion_end_date) {
+                    $project->promotion_start_date = null;
+                    $project->save();
+                }
+            }
+        }
+        
         return view('projects.myprojects', compact('projects', 'categories', 'user'));
     }
     
@@ -43,7 +68,7 @@ class ProjectsController extends Controller
     {
         $categories = Category::all();
         $pledges = [$pledge,$pledge,$pledge];
-        return view('projects.edit', compact('project', 'pledges', 'categories'));
+        return view('projects.edit', compact('user', 'project', 'pledges', 'categories'));
     }
 
 
@@ -214,20 +239,66 @@ class ProjectsController extends Controller
 
     public function getPromote($project_id, $layer_id)
     {
+        //date("Y-m-d")
         $currentUser = Auth::user();
         $project = Project::find($project_id);
 
-        $project->layer = $layer_id;
+        
+        switch ($layer_id) {
+            case 0:
+                $project->promotion_start_date = null;
+                $project->layer = 0;
+                break;
+            case 1:
+                if ($currentUser->credits >= 700) {
+                    $currentUser->credits = $currentUser->credits - 700;
+
+                    $project->layer = $layer_id;
+                    $project->promotion_start_date = date("Y-m-d");
+                    $currentUser->save();
+                } else {
+                    Session::flash('message', "You little lady, doesn't have enough credits !!!");
+                    return Redirect::back();
+                }
+                break;
+            
+            case 2:
+                if ($currentUser->credits >= 500) {
+                    $currentUser->credits = $currentUser->credits - 500;
+                    $project->layer = $layer_id;
+                    $project->promotion_start_date = date("Y-m-d");
+                    $currentUser->save();
+                } else {
+                    Session::flash('message', "You little lady, doesn't have enough credits !!!");
+                    return Redirect::back();
+                }
+                break;
+            case 3:
+                if ($currentUser->credits >= 300) {
+                    $currentUser->credits = $currentUser->credits - 300;
+                    $project->layer = $layer_id;
+                    $project->promotion_start_date = date("Y-m-d");
+                    $currentUser->save();
+                } else {
+                    Session::flash('message', "You little lady, doesn't have enough credits !!!");
+                    return Redirect::back();
+                }
+                break;
+            default:
+                # code...
+                break;
+        }
+
         $project->save();
-        return redirect()->route('projects.index');
+        return redirect()->route('pages.home');
     }
 
     public function destroy($project_id)
     {
         $project = Project::find($project_id);
-        
+
         $project->delete();
-        
+     
         return redirect()->route('projects.index');
     }
 }

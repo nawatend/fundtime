@@ -6,6 +6,10 @@
 @section('content')
 
 <!-- layer one start -->
+<div class="o-layer bg-g-legendary d-flex justify-content-start align-items-center ">
+    <h3 class="">Best Projects</h3>
+</div>
+<hr class="featurette-divider">
 <div class="row">
     @foreach($projects as $project)
     @if($project->layer == 1)
@@ -25,6 +29,10 @@
 <!-- layer one end -->
 
 <!-- layer two start -->
+<div class="o-layer bg-g-epic d-flex justify-content-start align-items-center ">
+    <h3 class="">Great Projects</h3>
+</div>
+<hr class="featurette-divider">
 <div class="row">
     @foreach($projects as $project)
     @if($project->layer == 2)
@@ -45,6 +53,10 @@
 
 
 <!-- layer 3 start -->
+<div class="o-layer bg-g-rare d-flex justify-content-start align-items-center ">
+    <h3 class="">Good Projects</h3>
+</div>
+<hr class="featurette-divider">
 <div class="row">
     @foreach($projects as $project)
     @if($project->layer == 3)

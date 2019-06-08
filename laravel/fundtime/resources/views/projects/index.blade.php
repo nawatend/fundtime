@@ -28,6 +28,9 @@
 @endif
 
 <hr class="featurette-divider">
+@if (Session::has('message'))
+<div class="alert alert-danger">{{ Session::get('message') }}</div>
+@endif
 <div class="row">
     @if($projects->isEmpty())
 
@@ -58,9 +61,29 @@
                     Promote
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{route('projects.promote',[$project->id, 1])}}">To Layer: 1</a>
-                    <a class="dropdown-item" href="{{route('projects.promote',[$project->id, 2])}}">To Layer: 2</a>
-                    <a class="dropdown-item" href="{{route('projects.promote',[$project->id, 3])}}">To Layer: 3</a>
+
+                    @if($project->layer == 0)
+                    <a class="dropdown-item bg-g-legendary" href="{{route('projects.promote',[$project->id, 1])}}">To
+                        Layer:
+                        1 [700
+                        F's for 7 Days]</a>
+                    <a class="dropdown-item bg-g-epic" href="{{route('projects.promote',[$project->id, 2])}}">To Layer:
+                        2 [500
+                        F's for 7 Days]</a>
+                    <a class="dropdown-item bg-g-rare" href="{{route('projects.promote',[$project->id, 3])}}">To Layer:
+                        3 [300
+                        F's for 7 Days]</a>
+                    @endif
+
+                    @if($project->layer != 0)
+                    <a class="dropdown-item list-group-item-action list-group-item-success disabled"
+                        href="{{route('projects.promote',[$project->id, 3])}}">Current Layer:
+                        {{$project->layer}}</a>
+                    <a class="dropdown-item list-group-item-action list-group-item-danger"
+                        href="{{route('projects.promote',[$project->id, 0])}}">Stop
+                        Promotion</a>
+                    @endif
+
                 </div>
                 @endif
             </div>
