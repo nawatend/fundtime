@@ -13,13 +13,15 @@
         aria-expanded="false">
         Sort By Category
     </button>
+
     <div class="dropdown-menu">
         @foreach($categories as $category)
         <a class="dropdown-item"
             href="{{route('categories.index', $category->category_name)}}">{{ucfirst($category->category_name)}}</a>
-
         @endforeach
     </div>
+
+    
 </div>
 @else
 <h4>Do you have a Great Project To Show The World? <a href=" {{route('home')}}"><button class="btn btn-primary"
