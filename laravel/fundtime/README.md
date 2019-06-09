@@ -67,4 +67,4 @@ CREDIT_RATIO=1
 
 ```
 8. Your php.ini file extensions:
-    ![GitHub Logo](/docs/images/settings_php_ini.png)
+    ![GitHub Logo](../docs/images/settings_php_ini.png)
