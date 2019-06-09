@@ -49,7 +49,8 @@ class ProjectsController extends Controller
         //sortByDesc Z -> A
         //sortBy
         $categories = Category::all()->sortBy("category_name");
-        $projects = Project::all();
+        $projects = Project::where('user_id', $user->id)->get();
+        
         //check for outdated promotion
         foreach ($projects as $project) {
             if ($project->promotion_start_date != null) {

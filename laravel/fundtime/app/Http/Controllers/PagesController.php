@@ -11,7 +11,8 @@ class PagesController extends Controller
 {
     public function getIndex()
     {
-        $projects = Project::all();
+        $projects = Project::where('layer', '!=', 0)->get();
+        
       
         return view('pages.home')->with(compact('projects'));
     }
