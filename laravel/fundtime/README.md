@@ -67,4 +67,5 @@ CREDIT_RATIO=1
 
 ```
 8. Your php.ini file extensions:
-    ![PHP INI Image](public/images/settings_php_ini.jpg)
+
+![PHP INI Image](public/images/settings_php_ini.jpg)
