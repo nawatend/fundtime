@@ -149,6 +149,8 @@
             <strong>Only file format: PNG, JPG, JPEG </strong>
         </div>
         <input type="file" id="customFile" name="images[]" multiple value="Upload Images"
+
+        
             class="form-control {{$errors->any() ? $errors->has('images') ? 'is-invalid': 'is-valid' : ''}}">
 
         @if ($errors->has('images'))

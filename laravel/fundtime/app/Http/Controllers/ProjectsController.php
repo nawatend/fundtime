@@ -245,8 +245,9 @@ class ProjectsController extends Controller
     {
         $currentUser = Auth::user();
         $project = Project::find($project_id);
-
+        $admin = User::where('role', "=", 'admin')->firstOrFail();
         
+        // dd($admin->name);
         switch ($layer_id) {
             case 0:
                 $project->promotion_start_date = null;
@@ -255,9 +256,11 @@ class ProjectsController extends Controller
             case 1:
                 if ($currentUser->credits >= 700) {
                     $currentUser->credits = $currentUser->credits - 700;
-
+                    
                     $project->layer = $layer_id;
                     $project->promotion_start_date = date("Y-m-d");
+                    $admin->credits += 700;
+                    $admin->save();
                     $currentUser->save();
                 } else {
                     Session::flash('message', "You little lady, doesn't have enough credits !!!");
@@ -270,6 +273,9 @@ class ProjectsController extends Controller
                     $currentUser->credits = $currentUser->credits - 500;
                     $project->layer = $layer_id;
                     $project->promotion_start_date = date("Y-m-d");
+
+                    $admin->credits += 500;
+                    $admin->save();
                     $currentUser->save();
                 } else {
                     Session::flash('message', "You little lady, doesn't have enough credits !!!");
@@ -281,6 +287,9 @@ class ProjectsController extends Controller
                     $currentUser->credits = $currentUser->credits - 300;
                     $project->layer = $layer_id;
                     $project->promotion_start_date = date("Y-m-d");
+
+                    $admin->credits += 300;
+                    $admin->save();
                     $currentUser->save();
                 } else {
                     Session::flash('message', "You little lady, doesn't have enough credits !!!");
