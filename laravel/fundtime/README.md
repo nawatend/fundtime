@@ -20,7 +20,7 @@ APP_URL=http://localhost
 LOG_CHANNEL=stack
 
 DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
+DB_HOST=127.0.X.X
 DB_PORT=3306
 DB_DATABASE=fundtime
 DB_USERNAME=root
