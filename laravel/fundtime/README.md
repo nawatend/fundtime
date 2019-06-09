@@ -67,4 +67,4 @@ CREDIT_RATIO=1
 
 ```
 8. Your php.ini file extensions:
-    ![GitHub Logo](../fundtime/public/images/settings_php_ini.png)
+    ![GitHub Logo](/public/images/settings_php_ini.png)
