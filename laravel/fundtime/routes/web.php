@@ -1,7 +1,5 @@
 <?php
-// Route::get('/', function () {
-//     return view('emails/mail');
-// });
+
 
 Route::name('mails.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/mail', 'MailsController@getIndex')->name('index');
@@ -17,10 +15,6 @@ Route::name('news.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/news/delete/{news_id}', 'NewsController@destroy')->name('delete');
 });
 
-Route::name('profile.')->group(/*['middleware' => ['auth']], */function () {
-    Route::get('/profile', 'ProfileController@getIndex')->name('index');
-    Route::get('/profile/edit', 'ProfileController@getEdit')->name('edit');
-});
 
 Route::name('projects.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/projects', 'ProjectsController@getIndex')->name('index');
@@ -32,6 +26,7 @@ Route::name('projects.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/projects/delete/{projectId}', 'ProjectsController@destroy')->name('delete');
     Route::get('/promote/projectId={projectId}/layerId={layerId}', 'ProjectsController@getPromote')->name('promote');
 });
+
 
 Route::name('categories.')->group(/*['middleware' => ['auth']], */function () {
     Route::get('/projects/categories/{category}', 'CategoryController@getIndex')->name('index');
