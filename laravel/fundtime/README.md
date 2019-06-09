@@ -2,13 +2,13 @@
 
 ### How To Start:
 
-1. Maak een folder op uw lokale pc
+1. Make a folder on your local pc
 2. Download fundtime project https://github.com/nawatend/fundtime
-3. In terminal, lokaliseer root folder van fundtime project(dus waar package.json file zit)
-4. Voer npm install in terminal
-5. Dan voer composer install in terminal
-6. Voer php artisan key:generate in terminal
-7. Maak een .env file
+3. In terminal, locate root folder of fundtime project(thus where package.json file is)
+4. Execute **npm install** in terminal
+5. Execute **composer install** in terminal
+6. Execute **php artisan key:generate** in terminal
+7. Make a .env file in root
 ```javascript
 
 APP_NAME=FundTime
@@ -67,4 +67,4 @@ CREDIT_RATIO=1
 
 ```
 8. Your php.ini file extensions:
-    ![GitHub Logo](../docs/images/settings_php_ini.png)
+    ![GitHub Logo](../fundtime/public/images/settings_php_ini.png)
